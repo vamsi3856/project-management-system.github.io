@@ -1,0 +1,186 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Project Management</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar-Navigation-with-Button.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar-Navigation-with-Search.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar.css' %}">
+        <style>
+            .form-control:focus {
+                box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+                border-color: #007bff;
+                outline: 0;
+              }
+            /* Set the navbar to be sticky at the top of the page */
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+            }
+            
+            /* Hide the header content when the user scrolls down */
+            .header-content {
+                display: block;
+            }
+            .my-div {
+                clear: both;
+              }
+            
+            .header-content.hidden {
+                display: none;
+            }
+            
+            /* Add a transition effect to the header content */
+            .header-content {
+                transition: all 0.3s ease-in-out;
+            }
+            
+            /* Set a margin-top for the navbar so that it doesn't overlap with the content */
+           
+            
+            /* Hide the navbar when the header content is hidden */
+            .navbar.hidden {
+                display: none;
+            }
+            @media (max-width: 768px) {
+                img {
+                  height: 200px;
+                  width: 200px;
+                }
+              }
+              @media (max-width: 1000px) {
+                img {
+                  height: 200px;
+                  width: 200px;
+                }
+              }
+        </style>
+    </head>
+    <body>
+        <section>
+            <div class="container-fluid p-0 m-0 text-center header-content" style="background-color:#ff4240;color: #ffffff;">
+                <div class="text-white p-4 p-md-5 text-center">
+                    <div class="pb-2 pb-lg-1 text-center">
+                        <h1 class="fw-bold mb-2 text-center">Project Management System</h1>
+                        <p class="mb-0">Platform where you can share your projects and find projects..!!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+            <div class="navbar navbar-light navbar-expand-md sticky-top navigation-clean-button" style="background-color:#383838;color: #ffffff;">
+                <div class="container-fluid ms-auto"><h4><i class="fa fa-user-circle-o"></i></h4>&nbsp;<h4>Hello {{ uname }}</h4><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/userlist"><i class="fa fa-user"></i>&nbsp;Users</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/add_project"><i class="fa fa-plus"></i>&nbsp;Add</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/profile/{{ uname }}"><i class="fa fa-user-circle"></i>&nbsp;Profile</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/logout"><i class="fa fa-sign-out"></i>&nbsp;Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="float-end px-4" style="width:25%;">
+            <label for="searchInput" class="fw-bold">Search:</label>
+            <input type="search" class="form-control" placeholder="search here...." onkeyup="filterCards()" id="searchInput"/>
+          </div>
+          
+          {% if data %}
+            {% for i in data %}
+              <section id="card{{ forloop.counter }}" class="py-2 py-xl-5 my-div card-section" data-tags="{{ i.5 }}" data-title="{{ i.2 }}" data-author="{{ i.1 }}">
+                <div class="container">
+                  <div class="text-white bg-info border rounded border-0 p-4 p-md-5">
+                    <div class="my-4">
+                      <p class="text-dark fw-bold d-inline mb-4">Author : </p>
+                      <span class="text-light d-inline-block"><a class="text-light fs-3" href="/profile/{{ i.1 }}">{{ i.1 }}</a></span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <h2 class="fw-bold text-white">
+                        <p class="text-dark fw-bold d-inline">Title : </p>
+                        <span class="text-light d-inline-block">{{ i.2 }}</span>
+                      </h2>
+                    </div>
+                    <p class="text-dark fw-bold d-inline mb-4">About project : </p>
+                    <span class="text-light d-inline-block">{{ i.6 }}</span>
+                    <div class="my-4">
+                      <p class="text-dark fw-bold d-inline mb-4">Tags : </p>
+                      {% for tag in i.5|split:',' %}
+                        <span class="badge bg-secondary me-2">{{ tag }}</span>
+                      {% endfor %}
+                    </div>
+                    <div class="my-4">
+                      <p class="text-dark fw-bold d-inline mb-4">Date : </p>
+                      <span class="text-light d-inline-block">{{ i.7 }}</span>
+                    </div>
+                <div class="my-3">
+                  {% if 'https://' in i.4 %}
+                    <a class="btn btn-primary btn-lg me-2" role="button" href="{{ i.4 }}" target="_blank">Click for Code</a>
+                  {% else %}
+                    <a class="btn btn-primary btn-lg me-2" role="button" href="https://{{ i.4 }}" target="_blank">Click for Code</a>
+                  {% endif %}
+                  {% if 'https://' in i.3 %}
+                    <a class="btn btn-light btn-lg" role="button" href="{{ i.3 }}" target="_blank">Click for Demo</a>
+                  {% else %}
+                    <a class="btn btn-light btn-lg" role="button" href="https://{{ i.3 }}" target="_blank">Click for Demo</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </section>
+        {% endfor %}
+        {% else %}
+        <h2>No projects</h2>
+      {% endif %}
+      <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <p class="text-light mb-0">Copyright © 2023 <small>made by vamsi</small></p>
+        </div>
+    </footer>
+      <script>
+        function filterCards() {
+            var searchValue = document.getElementById('searchInput').value.toLowerCase();
+            var cards = document.querySelectorAll('.card-section');
+          
+            cards.forEach(function(card) {
+              var title = card.dataset.title.toLowerCase();
+              var tags = card.dataset.tags.toLowerCase().split(',');
+              var author = card.dataset.author.toLowerCase();
+          
+              if (title.includes(searchValue) || author.includes(searchValue)) {
+                card.style.display = '';
+              } else {
+                var match = tags.some(function(tag) {
+                  return tag.trim().includes(searchValue);
+                });
+                card.style.display = match ? '' : 'none';
+              }
+            });
+          }
+          
+          document.getElementById('searchInput').addEventListener('input', filterCards);
+    </script>
+      <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('myNavbar');
+            const header = document.querySelector('section');
+    
+            if (window.pageYOffset > header.offsetHeight) {
+                navbar.classList.add('fixed-top');
+                header.style.display = 'none';
+            } else {
+                navbar.classList.remove('fixed-top');
+                header.style.display = 'block';
+            }
+        });
+    </script>
+        <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script id="bs-live-reload" data-sseport="51106" data-lastchange="1681750500271" src="{% static '/js/livereload.js' %}"></script>
+    </body>
+</html>

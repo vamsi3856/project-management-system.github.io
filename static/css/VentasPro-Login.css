@@ -1,0 +1,37 @@
+#main {
+    height: 100vh;
+    background-image: url("C:\Users\vamsi\OneDrive\Desktop\project-management\project\static\images\login.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  #info {
+    width: 90%;
+    height: 900px;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    margin: auto;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    font-size: 12px;
+  }
+  
+  @media (min-width: 576px) {
+    #info {
+      max-width: 350px;
+    }
+  }
+  
+  #form-login {
+    max-width: 70%;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  
+  #ventaspro-logo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }

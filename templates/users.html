@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>users</title>
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/fonts/fontawesome5-overrides.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="{% static 'css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css' %}">
+    <style>
+        /* Set the navbar to be sticky at the top of the page */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        /* Hide the header content when the user scrolls down */
+        .header-content {
+            display: block;
+        }
+        
+        .header-content.hidden {
+            display: none;
+        }
+        
+        /* Add a transition effect to the header content */
+        .header-content {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Set a margin-top for the navbar so that it doesn't overlap with the content */
+       
+        
+        /* Hide the navbar when the header content is hidden */
+        .navbar.hidden {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            img {
+              height: 200px;
+              width: 200px;
+            }
+          }
+          @media (max-width: 1000px) {
+            img {
+              height: 200px;
+              width: 200px;
+            }
+          }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div class="container-fluid p-0 m-0 text-center header-content" style="background-color:#ff4240;color: #ffffff;">
+            <div class="text-white p-4 p-md-5 text-center">
+                <div class="pb-2 pb-lg-1 text-center">
+                    <h1 class="fw-bold mb-2 text-center">Project Management System</h1>
+                    <p class="mb-0">Platform where you can share your projects and find projects..!!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% if uname %}
+    <div class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color:#383838; height:70px;color: #ffffff;">
+        <div class="container-fluid ms-auto" style="background-color:#383838;color: #ffffff;">
+            <h4><i class="fa fa-user-circle-o"></i></h4>&nbsp;<h4>Hello {{ uname }}</h4>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" style="cursor:pointer;"><a class="nav-link active" style="color: #ffffff;" href="/"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                    <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/add_project"><i class="fa fa-plus"></i>&nbsp;Add</a></li>
+                    <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/profile/{{ uname }}"><i class="fa fa-user-plus"></i>&nbsp;Profile</a></li>
+                    <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/logout"><i class="fa fa-sign-out"></i>&nbsp;Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color:#383838; height:70px;color: #ffffff;">
+    <div class="container-fluid ms-auto" style="background-color:#383838;color: #ffffff;">
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1">
+            <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" style="cursor:pointer;"><a class="nav-link active" style="color: #ffffff;" href="/"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/login"><i class="fa fa-plus"></i>&nbsp;Add</a></li>
+                <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/register"><i class="fa fa-user-plus"></i>&nbsp;Sign Up</a></li>
+                <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/login"><i class="fa fa-sign-in"></i>&nbsp;Sign In</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    <div class="container-fluid">
+        
+        <div class="card" id="TableSorterCard">
+            <div class="card-header py-3">
+                <div class="row table-topper align-items-center">
+                    <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                        <p class="text-primary m-0 fw-bold">Users list</p>
+                    </div>
+                    <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;"><button class="btn btn-primary btn-sm reset" type="button" style="margin: 2px;">Borrar Filtros</button><button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-plus"></i></button><button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-minus"></i></button></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table tablesorter" id="ipi-table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">S.no</th>
+                                    <th class="text-center">Username</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center filter-false sorter-false">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                {% if t %}
+                                    {% for i in t %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ i.0 }}</td>
+                                            <td>{{ i.1 }}</td>
+                                            <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
+                                                <a class="btn btn-primary" href="/profile/{{ i.0 }}">View profile</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <h2>No users found</h2>
+                                {% endif %}
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <p class="text-light mb-0">Copyright © 2023 <small>made by vamsi</small></p>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('myNavbar');
+            const header = document.querySelector('section');
+    
+            if (window.pageYOffset > header.offsetHeight) {
+                navbar.classList.add('fixed-top');
+                header.style.display = 'none';
+            } else {
+                navbar.classList.remove('fixed-top');
+                header.style.display = 'block';
+            }
+        });
+    </script>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static '/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js '%}"></script>
+    <script src="{% static '/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js' %}"></script>
+    <script id="bs-live-reload" data-sseport="62277" data-lastchange="1682170678175" src="/js/livereload.js"></script>
+</body>
+
+</html>

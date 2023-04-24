@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Project Management</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/fonts/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar-Navigation-with-Button.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar-Navigation-with-Search.css' %}">
+        <link rel="stylesheet" href="{% static '/css/Dark-NavBar.css' %}">
+
+    </head>
+    <body>
+        <section>
+            <div class="container-fluid p-0 m-0 text-center">
+                <div class="text-white p-4 p-md-5 text-center"style="background-color:#ff4240;color: #ffffff;">
+                    <div class="pb-2 pb-lg-1 text-center">
+                        <h1 class="fw-bold mb-2 text-center">Project Management System</h1>
+                        <p class="mb-0">Platform where you can share your projects and find projects..!!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div>
+            <nav class="navbar navbar-light navbar-expand-md sticky-top navigation-clean-button" style="background-color:#383838;color: #ffffff;">
+                <div class="container-fluid"><h4><i class="fa fa-user-circle-o"></i></h4>&nbsp;<h4>Hello</h4><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link active" style="color: #ffffff;" href="#"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link active" style="color: #ffffff;" href="/userlist"><i class="fa fa-user"></i>&nbsp;Users</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/register"><i class="fa fa-user-plus"></i>&nbsp;Sign Up</a></li>
+                            <li class="nav-item" style="cursor:pointer;"><a class="nav-link" style="color: #ffffff;" href="/login"><i class="fa fa-sign-in"></i>&nbsp;Sign In</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script id="bs-live-reload" data-sseport="51106" data-lastchange="1681750500271" src="{% static '/js/livereload.js' %}"></script>
+    </body>
+</html>

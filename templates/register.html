@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/VentasPro-Login.css' %}">
+</head>
+
+<body>
+    <div id="main">
+        <div class="text-center" id="info">
+            <h3 class="text-center mt-4">Sign Up</h3>
+            <p class="text-center">All your details are safe and secure.</p>
+            <form class="text-start" id="form-login" action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                <div class="mb-3"><label class="form-label" id="lbl-usuario" for="txt-usuario">Username</label><input class="form-control" type="text" name="uname" id="txt-usuario"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-password" for="txt-password">Password</label><input class="form-control" type="password" name="password" id="txt-password"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-cnfpassword" for="txt-cnfpassword">Confirm Password</label><input class="form-control" type="password" name="cnfpassword" id="txt-password"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">Email</label><input class="form-control" type="email" id="txt-password" name="email"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">College name</label><input class="form-control" type="text" id="txt-password" name="college"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">LinkedIn url/Username</label><input class="form-control" type="text" id="txt-password" name="linkedin"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">Preffered skill1</label><input class="form-control" type="text" id="txt-password" name="skill1"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">Preffered skill2</label><input class="form-control" type="text" id="txt-password" name="skill2"></div>
+                <div class="mb-3"><label class="form-label" id="lbl-email" for="txt-email">Preffered skill3(optional)</label><input class="form-control" type="text" id="txt-password" name="skill3"></div>
+                <button class="btn btn-primary" id="btn-sesion" type="submit" style="--bs-primary: #256db4;--bs-primary-rgb: 37,109,180;background: #256db4;">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script id="bs-live-reload" data-sseport="56342" data-lastchange="1681807530910" src="{% static '/js/livereload.js' %}"></script>
+</body>
+
+</html>

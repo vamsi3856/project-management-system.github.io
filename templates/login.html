@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-form---Ambrodu-login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login-form---Ambrodu.css' %}">
+</head>
+
+<body>
+    <div class="body" style="padding-top: 150px;">
+        <div class="border rounded shadow login-center">
+            <form style="padding-top: 32px;" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="text-center form-group mb-3"><img class="img-fluid" style="width: 100px;" src="{% static 'images/default.png' %}"></div>
+                <div class="d-flex justify-content-center form-group mb-3"><input class="form-control" type="text" style="width: 200px;" name="uname" placeholder="Username"></div>
+                <div class="d-flex justify-content-center form-group mb-3"><input class="form-control" type="password" style="width: 200px;" name="password" placeholder="Password"></div>
+                <div class="d-flex justify-content-center form-group mb-3"><button class="btn btn-dark" style="width: 200px;" type="submit">Login</button></div>
+            </form>
+        </div>
+    </div>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script id="bs-live-reload" data-sseport="59675" data-lastchange="1681828733111" src="/js/livereload.js"></script>
+</body>
+
+</html>

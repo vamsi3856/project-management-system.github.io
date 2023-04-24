@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Update project</title>
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/Contact-Form-by-Moorcam.css' %}">
+    <style>
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		}
+		.dropdown-select option {
+			padding: 5px;
+		}
+		.search-input {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #fff;
+		}
+		.selected-options {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-top: 5px;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #f5f5f5;
+		}
+		.selected-option {
+			display: flex;
+			align-items: center;
+			margin-right: 5px;
+			margin-bottom: 5px;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #fff;
+		}
+		.selected-option-text {
+			margin-left: 5px;
+		}
+	</style>
+</head>
+
+<body>
+    <section class="shadow contact-clean" style="background: rgb(3,77,139);">
+        <form class="bg-light border rounded border-secondary shadow-lg" method="POST" action='/update/{{ id }}/{{ uname }}/' style="background: rgb(248,248,249);">
+            {% csrf_token %}
+            <h2 class="text-center text-dark">Update your project</h2>
+            <div class="form-group mb-3"><label class="form-label text-dark fw-bold" id="lbl-usuario" for="txt-usuario">Project title</label><input class="form-control" type="text" name="pro_title" placeholder="enter project name..." value="{{ l.2 }}"></div>
+            <div class="form-group mb-3"><label class="form-label text-dark fw-bold" id="lbl-usuario" for="txt-usuario">Project Demo link</label><input class="form-control" type="text" name="pro_demo" placeholder="Demo link" value="{{ l.3 }}" inputmode="tel"></div>
+            <div class="form-group mb-3"><label class="form-label text-dark fw-bold" id="lbl-usuario" for="txt-usuario">Source code link</label><input class="form-control" type="text" name="pro_code" placeholder="source code link" value="{{ l.4 }}"></div>
+            <div class="form-group mb-3"><label class="form-label text-dark fw-bold" id="lbl-usuario" for="txt-usuario">Select Tags(use ctrl to select more)</label>
+                <div class="dropdown">
+                    <input type="text" class="search-input" placeholder="Search...">
+                    <div class="selected-options"></div>
+                    <select class="dropdown-select" multiple name="my_options">
+                    <option value="Web developement">Web development</option>
+                    <option value="App developement">App development</option>
+                    <option value="Python">Python</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Django">Django</option>
+                    <option value="Node js">Node js</option>
+                    <option value="Flask">Flask</option>
+                    <option value="Java script">Java script</option>
+                    <option value="Frontend">Frontend</option>
+                    <option value="Backend">Backend</option>
+                    <option value="MAchine learning">Machine learning</option>
+                    <option value="Android development">Android developement</option>
+                    <option value="Mysql">Mysql</option>
+
+                    </select>
+                
+            </div>
+            <div class="form-group mb-3"><label class="form-label text-dark fw-bold" id="lbl-usuario" for="txt-usuario">Description</label><textarea class="form-control" name="description" placeholder="description">{{ l.6 }}</textarea></div>
+            <div class="form-group mb-3"><button class="btn btn-primary" type="submit">send </button></div>
+        </form>
+    </section>
+    <script>
+        // Get the select element
+        var select = document.querySelector(".dropdown-select");
+        // Get the search input element
+        var searchInput = document.querySelector(".search-input");
+        // Get the selected options container element
+        var selectedOptionsContainer = document.querySelector(".selected-options");
+        // Listen for keyup event on search input
+        searchInput.addEventListener("keyup", function(event) {
+            // Get the search term
+            var searchTerm = event.target.value.toLowerCase();
+            // Loop through all the options
+            for (var i = 0; i < select.options.length; i++) {
+                var option = select.options[i];
+                // Get the option text
+                var optionText = option.text.toLowerCase();
+                // Check if the option text contains the search term
+                if (optionText.indexOf(searchTerm) > -1) {
+                    // Show the option
+                    option.style.display = "";
+                } else {
+                    // Hide the option
+                
+                    option.style.display = "none";
+                     }
+                    }
+                    });
+    // Listen for change event on select element
+select.addEventListener("change", function(event) {
+    // Get all the selected options
+    var selectedOptions = Array.from(select.selectedOptions);
+    
+    // Clear the selected options container
+    selectedOptionsContainer.innerHTML = "";
+  
+    // Loop through all the selected options
+    selectedOptions.forEach(function(selectedOption) {
+      // Create a div element for the selected option
+      var selectedOptionElement = document.createElement("div");
+      selectedOptionElement.classList.add("selected-option");
+      // Create a span element for the selected option text
+      var selectedOptionTextElement = document.createElement("span");
+      selectedOptionTextElement.classList.add("selected-option-text");
+      selectedOptionTextElement.textContent = selectedOption.text;
+      // Append the selected option text to the selected option element
+      selectedOptionElement.appendChild(selectedOptionTextElement);
+      // Append the selected option element to the selected options container
+      selectedOptionsContainer.appendChild(selectedOptionElement);
+    });
+  });
+    </script>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script id="bs-live-reload" data-sseport="58919" data-lastchange="1681909742308" src="/js/livereload.js"></script>
+</body>
+
+</html>
